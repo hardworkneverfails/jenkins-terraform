@@ -3,7 +3,7 @@ pipeline {
   stages{
     stage("terraform cmd") {
       steps{
-       sh "terraform init"
+       sh "terraform --version"
       }
     }
   }
