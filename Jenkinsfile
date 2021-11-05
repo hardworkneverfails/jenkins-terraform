@@ -1,6 +1,8 @@
 pipeline {
- tool name: 'Terraform11', type: 'terraform'
+
  agent any
+ tools { name: 'Terraform11', type: 'terraform'
+       }
  //environment {
    //PATH = "${PATH}:${PATHER}"
  //}
