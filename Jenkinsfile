@@ -1,5 +1,7 @@
 pipeline {
  agent any
+ enviornment {
+  PATH = "${PATH}:${pathe}"
   stages{
     stage("terraform cmd") {
       steps{
@@ -8,4 +10,9 @@ pipeline {
     }
   }
 
+}
+
+def pathe {
+ def hame = tool name: 'Terraform11', type: 'terraform'
+ return hame
 }
