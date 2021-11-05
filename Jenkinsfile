@@ -6,7 +6,7 @@ pipeline {
   stages{
     stage("terraform cmd") {
       steps{
-       sh "terraform --version"
+       sh "terraform plan"
       }
     }
   }
