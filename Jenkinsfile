@@ -16,4 +16,4 @@ pipeline {
 //def PATHER(){
  //def hame = tool name: 'terraform12', type: 'terraform'
  //return hame
-/}
+//}
