@@ -1,4 +1,5 @@
 provider "aws" {
+  provider = "default"
   region  = "us-east-1"
 }
 
