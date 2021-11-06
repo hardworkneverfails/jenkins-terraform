@@ -8,7 +8,7 @@ pipeline {
     }
    stage("terraform cmds") {
       steps{
-       sh ("terraform ${action}");
+       sh ("terraform ${action} --auto-approve");
       }
     }
    
