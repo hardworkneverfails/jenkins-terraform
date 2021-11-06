@@ -3,9 +3,15 @@ pipeline {
   stages{
     stage("terraform cmd") {
       steps{
-       sh "terraform plan"
+       sh ("terraform init");
       }
     }
+   stage("terraform cmds") {
+      steps{
+       sh ("terraform ${action}");
+      }
+    }
+   
   }
 
 }
