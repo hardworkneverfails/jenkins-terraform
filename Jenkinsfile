@@ -9,8 +9,8 @@ pipeline {
     stage("terraform directory") {
       steps{
         script {
-          dir("terraform")
-       }
+             dir("terraform")
+             }
       }
     }
    stage("terraform plan") {
