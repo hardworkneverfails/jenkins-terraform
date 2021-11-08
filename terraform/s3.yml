@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: isntall boto3
+      pip:
+        name: boto3
+        state: present
+    - name: se bucekt
+      s3_bucket:
+       name: majaremama
+       region: us-east-1
+       state: present
