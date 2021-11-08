@@ -7,8 +7,7 @@ pipeline {
  agent any
   stages{
    stage("terraform plan") {
-      steps{
-          sh 'mkdir terraform';
+      steps {
           sh 'pwd;cd terraform ; terraform init -input=false'
           sh 'pwd;cd terraform ; terraform workspace new ${environment}'
           sh 'pwd;cd terraform ; terraform workspace select ${environment}'
