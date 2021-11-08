@@ -11,6 +11,13 @@ pipeline {
                
             }
   stages{
+     stage("s3 creation"){
+        steps {
+            sh'ansible-playbook s3.yml"
+        }
+     }
+           
+     
    stage("terraform plan") {
       steps {
           sh 'pwd;cd terraform ; terraform init -input=false'
