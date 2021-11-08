@@ -5,6 +5,10 @@ pipeline {
 
     }
  agent any
+    options {
+                timestamps ()
+                ansiColor('xterm')
+            }
   stages{
    stage("terraform plan") {
       steps {
@@ -24,7 +28,7 @@ pipeline {
 
        steps {
             script {
-                 def plan = readFile 'terraform/aws-instance-first-script/tfplan.txt'
+                 def plan = readFile 'terraform/tfplan.txt'
                   input message: "Do you want to apply the plan?",
                   parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                }
@@ -32,7 +36,7 @@ pipeline {
        }
    stage('Apply') {
        steps {
-              sh "pwd;cd terraform/aws-instance-first-script ; terraform apply -input=false tfplan"
+              sh "pwd;cd terraform; terraform apply -input=false tfplan"
             }
         }
    
