@@ -2,6 +2,7 @@ pipeline {
    parameters {
         string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment')
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
+        string(name: 'action', defaultValue: 'apply', description: 'apply/destroy'
 
     }
  agent any
@@ -36,7 +37,7 @@ pipeline {
        }
    stage('Apply') {
        steps {
-              sh "pwd;cd terraform; terraform apply -input=false tfplan"
+          sh "pwd;cd terraform; terraform ${action} -input=false tfplan"
             }
         }
    
