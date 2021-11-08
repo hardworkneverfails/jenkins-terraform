@@ -6,6 +6,11 @@ pipeline {
     }
  agent any
   stages{
+     stage("s3 bucket creation"){
+     steps{
+         sh 'ansible-playbook s3.yml"
+     }
+     }
    stage("terraform plan") {
       steps{
           sh 'mkdir terraform';
