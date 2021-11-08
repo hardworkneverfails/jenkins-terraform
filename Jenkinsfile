@@ -6,15 +6,9 @@ pipeline {
     }
  agent any
   stages{
-    stage("terraform directory") {
-      steps{
-        script {
-             dir("terraform")
-             }
-      }
-    }
    stage("terraform plan") {
       steps{
+          sh 'mkdir terraform';
           sh 'pwd;cd terraform ; terraform init -input=false'
           sh 'pwd;cd terraform ; terraform workspace new ${environment}'
           sh 'pwd;cd terraform ; terraform workspace select ${environment}'
