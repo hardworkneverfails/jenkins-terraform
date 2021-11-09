@@ -17,7 +17,7 @@ pipeline {
         sh "pwd; cd terraform; terraform apply -var-file ${Env}.tfvars -auto-approve"
        }
      }
-     stage("terraform init and apply on Prd Enironemnt"){
+     stage("terraform init and apply on Prd Enironemnts"){
        steps {
           sh "pwd;cd terraform"
           sh returnStatus: true, script: 'terraform workspace new prod'
