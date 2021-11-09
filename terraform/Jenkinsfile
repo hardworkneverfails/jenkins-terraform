@@ -15,7 +15,7 @@ pipeline {
           sh "terraform workspace select dev"
           sh "terraform init"
           sh "pwd; cd terraform"
-          sh "terraform apply -var-file ${Env}.tfvars -auto-approve"
+          sh 'terraform apply -var-file "${Env}.tfvars" -auto-approve'
        }
      }
      stage("terraform init and apply on Prd Enironemnts"){
