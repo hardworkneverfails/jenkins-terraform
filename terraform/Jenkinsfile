@@ -3,6 +3,7 @@ pipeline {
   stages{
      stage("terraform init and apply on Dev Enironemnt"){
        steps {
+          sh "pwd;cd terraform"
           sh returnStatus: true, script: 'terraform workspace new dev'
           sh "terraform init"
           sh "terraform apply -var-file=dev.tfvars -auto-approve"
