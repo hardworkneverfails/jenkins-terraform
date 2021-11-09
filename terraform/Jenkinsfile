@@ -1,5 +1,12 @@
 pipeline { 
  agent any
+ parameters {
+    choice(
+      name: 'Env',
+      choices: ['DEV','PROD'],
+      description: 'Passing the Environment'
+    )
+  }
   stages{
      stage("terraform init and apply on Dev Enironemnt"){
        steps {
@@ -7,7 +14,7 @@ pipeline {
           sh returnStatus: true, script: 'terraform workspace new dev'
           sh "terraform workspace select dev"
           sh "terraform init"
-          sh "pwd; cd terraform; terraform apply -var-file dev.tfvars -auto-approve"
+        sh "pwd; cd terraform; terraform apply -var-file ${param.Env}.tfvars -auto-approve"
        }
      }
      stage("terraform init and apply on Prd Enironemnt"){
@@ -16,7 +23,7 @@ pipeline {
           sh returnStatus: true, script: 'terraform workspace new prod'
           sh "terraform workspace select prod"
           sh "terraform init"
-          sh "pwd; cd terraform; terraform apply -var-file prod.tfvars -auto-approve"
+        sh "pwd; cd terraform; terraform apply -var-file ${param.Env}.tfvars -auto-approve"
        }
      }
   }
