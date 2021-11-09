@@ -1,1 +1,1 @@
-instancing = t2.nano
+instancing = "t2.nano"
