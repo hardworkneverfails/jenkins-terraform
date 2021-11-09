@@ -5,7 +5,8 @@ pipeline {
        steps {
           sh "pwd;cd terraform"
           sh returnStatus: true, script: 'terraform workspace new dev'
-          sh " pwd; cd terraform; terraform init"
+          sh "pwd; cd terraform; terraform workspace select dev"
+          sh "pwd; cd terraform; terraform init"
           sh "pwd; cd terraform; terraform apply -var-file=dev.tfvars -auto-approve"
        }
      }
@@ -13,6 +14,7 @@ pipeline {
        steps {
           sh "pwd;cd terraform"
           sh returnStatus: true, script: 'terraform workspace new prod'
+          sh "pwd; cd terraform; terraform workspace select prod"
           sh "pwd; cd terraform; terraform init"
           sh "pwd; cd terraform; terraform apply -var-file=prod.tfvars -auto-approve"
        }
