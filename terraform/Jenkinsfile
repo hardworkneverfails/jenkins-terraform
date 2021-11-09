@@ -3,7 +3,7 @@ pipeline {
  parameters {
     choice(
       name: 'Env',
-      choices: ['DEV','PROD'],
+      choices: ['dev','prod'],
       description: 'Passing the Environment'
     )
   }
@@ -14,7 +14,7 @@ pipeline {
           sh returnStatus: true, script: 'terraform workspace new dev'
           sh "terraform workspace select dev"
           sh "terraform init"
-        sh "pwd; cd terraform; terraform apply -var-file ${param.Env}.tfvars -auto-approve"
+        sh "pwd; cd terraform; terraform apply -var-file ${Env}.tfvars -auto-approve"
        }
      }
      stage("terraform init and apply on Prd Enironemnt"){
@@ -23,7 +23,7 @@ pipeline {
           sh returnStatus: true, script: 'terraform workspace new prod'
           sh "terraform workspace select prod"
           sh "terraform init"
-        sh "pwd; cd terraform; terraform apply -var-file ${param.Env}.tfvars -auto-approve"
+        sh "pwd; cd terraform; terraform apply -var-file ${Env}.tfvars -auto-approve"
        }
      }
   }
