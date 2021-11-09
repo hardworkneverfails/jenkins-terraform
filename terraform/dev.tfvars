@@ -1,1 +1,1 @@
-instancing = t2.micro
+instancing = "t2.micro"
