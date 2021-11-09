@@ -1,53 +1,19 @@
-pipeline {
-   parameters {
-        string(name: 'environment', defaultValue: 'terraform', description: 'Workspace/environment file to use for deployment')
-        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
-        string(name: 'action', defaultValue: 'apply', description: 'apply/destroy')
-
-    }
+pipeline { 
  agent any
-    options {
-                timestamps ()
-               
-            }
   stages{
-     stage("s3 creation"){
-        steps {
-            sh "ansible-playbook s3.yml";
-        }
-     }
-           
-     
-   stage("terraform plan") {
-      steps {
-          sh 'pwd;cd terraform ; terraform init -input=false'
-          sh 'pwd;cd terraform ; terraform workspace new ${environment}'
-          sh 'pwd;cd terraform ; terraform workspace select ${environment}'
-          sh "pwd;cd terraform ; terraform plan -input=false -out tfplan "
-          sh 'pwd;cd terraform ; terraform show -no-color tfplan > tfplan.txt'
-      }
-    }
-   stage('Approval') {
-       when {
-               not {
-                   equals expected: true, actual: params.autoApprove
-               }
-           }
-
+     stage("terraform init and apply on Dev Enironemnt"){
        steps {
-            script {
-                 def plan = readFile 'terraform/tfplan.txt'
-                  input message: "Do you want to apply the plans?",
-                  parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
-               }
-           }
+          sh returnStatus: true, script: 'terraform workspace new dev'
+          sh "terraform init"
+          sh "terraform apply -var-file = dev.tfvars --auto-approve"
        }
-   stage('Apply') {
+     }
+     stage("terraform init and apply on Prd Enironemnt"){
        steps {
-          sh "pwd;cd terraform; terraform ${action} -input=false tfplan"
-            }
-        }
-   
+          sh returnStatus: true, script: 'terraform workspace new prod'
+          sh "terraform init"
+          sh "terraform apply -var-file = dev.tfvars --auto-approve"
+       }
+     }
   }
-
 }
