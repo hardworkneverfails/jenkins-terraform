@@ -19,7 +19,7 @@ pipeline {
      }
    stage("ansible playbook excutions"){
        steps {
-         sh 'pwd; cd terraform; ansible-playbook -i one.txt'
+         sh 'pwd; cd terraform; ansible-playbook -i one.txt,'
        }
      }
   }
