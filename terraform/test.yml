@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: excuting the work
+      command: echo "u r good"
