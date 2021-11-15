@@ -24,7 +24,7 @@ pipeline {
      }
    stage("cleaning the disk space"){
        steps {
-         sh 'docker images prune -y'
+         sh 'docker image prune'
        }
      }
   }
