@@ -24,9 +24,7 @@ pipeline {
      }
    stage("cleaning the disk space"){
        steps {
-         sh 'pwd; cd /var/lib/docker/; du -h'
-         sh 'docker images prune -y'
-         sh 'pwd: cd /var/lib/docker/; du -h'
+         sh 'sudo su;docker images prune -y'
        }
      }
   }
