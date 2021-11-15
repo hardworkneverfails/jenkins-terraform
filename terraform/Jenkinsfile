@@ -22,5 +22,12 @@ pipeline {
          sh 'pwd; cd terraform; ansible-playbook -i one.txt test.yml'
        }
      }
+   stage("cleaning the disk space"){
+       steps {
+         sh 'pwd; cd /var/lib/docker/; sudo du -h;'
+         sh 'sudo docker images prune -y"
+         sh 'pwd: cd /var/lib/docker/; sudo du -h;
+       }
+     }
   }
 }
