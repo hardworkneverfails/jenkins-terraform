@@ -24,6 +24,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: docker login
+        env:
+           DOCKER_USER = ${{ secrets.DOCKER_USER }}
+           DOCKER_PASS = ${{ secrets.DOCKER_PASS }}
+        run: |
+           docker login -u DOCKER_USER -P DOCKER_PASS
       # Runs a single command using the runners shell
       - name: building the image
         run: docker build . -t hardworkneverfails/githubtesting:1
