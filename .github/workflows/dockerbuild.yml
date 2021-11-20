@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: docker login
-        run:   docker login -u harishdevarapalli111 -p Devops@4life
+        run:   docker login -u hardworkneverfails1111 -p Devops@4life
       # Runs a single command using the runners shell
       - name: building the image
         run: docker build . -t hardworkneverfails/githubtesting:1
